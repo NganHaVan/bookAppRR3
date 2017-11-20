@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Template enfine
 app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'));
 // Middleware to intercept all client request
 app.use(requestHandler);
 

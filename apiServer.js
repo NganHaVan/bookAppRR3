@@ -83,7 +83,7 @@ mongoose.connect('mongodb://testUser:password@ds113936.mlab.com:13936/bookshop',
     var query ={_id:req.params._id};
     Books.remove(query,(err,book)=>{
       if (err) {
-        throw err;
+        console.log("# API delete book:",err);
       }
       res.json(book); 
     })
