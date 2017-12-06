@@ -12,12 +12,7 @@ import reducers from './reducers/reducers';
 import {addToCart} from './actions/cartActions';
 import {postBooks,deleteBook,updateBook} from './actions/bookActions';
 
-import Main from './main';
-import BookList from './Components/pages/bookList';
-import About from './Components/pages/about';
-import Contact from './Components/pages/contact';
-import BookForm from './Components/pages/bookForm';
-import CartPage from './Components/pages/cart';
+import routes from "./routes";
 
 const middleware=applyMiddleware(thunk,createLogger());
 // Create the store
@@ -26,15 +21,7 @@ const store=createStore(reducers,middleware);
 // REACT
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={browserHistory}>     
-            <Route path="/" component={Main}>
-                <IndexRoute component={BookList} />
-                <Route path="/admin" component={BookForm} />
-                <Route path="/cart" component={CartPage} />
-                <Route path='/about' component={About}/>
-                <Route path='/contact' component={Contact}/>
-            </Route>
-        </Router>
+        {routes}
     </Provider>,
     document.getElementById("app")
 );
