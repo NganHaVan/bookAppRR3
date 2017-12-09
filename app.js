@@ -10,7 +10,7 @@ var httpProxy=require('http-proxy');
 
 var app = express();
 // REQUEST HANDLER FOR SERER-SIDE RENDERING
-var requestHandler= require('./requestHandler');
+var handleRender= require('./requestHandler');
 const apiProxy=httpProxy.createProxyServer({
   target:'http://localhost:3001'
 });
@@ -26,8 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Template enfine
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
-// Middleware to intercept all client request
-app.use(requestHandler);
+// Middleware to intercept all client request. This is where we bring in the universal rendering aspect of the application.
+app.use(handleRender);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
