@@ -37,8 +37,8 @@ function handleRender(req,res){
             res.status(500).send("Error in fullfilling the request");
             }
             else if(redirect){
-            // res.status(302,redirect.pathname+redirect.search);
-            res.status(302).alert('Error');
+            res.status(302,redirect.pathname+redirect.search);
+            // res.status(302).alert('Error');
             }
             else if(props){
             res.render('index',{reactMarkup});
