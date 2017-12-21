@@ -1,5 +1,6 @@
 require('babel-core/register')({
-  "presets":["es2015","react","stage-3"]
+  "presets":["env","react","stage-3"],
+  "plugins":['transform-class-properties']
 });
 
 var express = require('express');
@@ -7,6 +8,11 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var httpProxy=require('http-proxy');
+
+// var routes=require('./src/routes');
+// var ReactDOMServer= require('react-dom/server');
+// var match=require('react-router');
+// var RoutingContext=require('react-router');
 
 var app = express();
 // REQUEST HANDLER FOR SERER-SIDE RENDERING
@@ -28,7 +34,26 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 // Middleware to intercept all client request. This is where we bring in the universal rendering aspect of the application.
 app.use(handleRender);
-
+// app.get('*',handleRender);
+/* app.get('*',(req, res) => {
+  
+    match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+  
+      if (error) {
+        res.status(500).send(error.message)
+      } else if (redirectLocation) {
+        res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      } else if (renderProps) {
+        const reactMarkup = ReactDOMServer.renderToStaticMarkup(<RoutingContext {...renderProps} />)
+        // Success!
+        res.status(200).render('index',{reactMarkup});
+  
+      } else {
+        res.status(404).render('Not found')
+      }
+    })
+  }) */
+  
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -44,7 +69,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err.message);
+  console.log(err);
 });
 
 module.exports = app;

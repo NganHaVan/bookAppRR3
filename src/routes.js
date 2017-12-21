@@ -12,7 +12,6 @@ import BookForm from './Components/pages/bookForm';
 import CartPage from './Components/pages/cart';
 
 const routes=(
-    <Router history={browserHistory}>     
         <Route path="/" component={Main}>
             <IndexRoute component={BookList} />
             <Route path="/admin" component={BookForm} />
@@ -20,6 +19,5 @@ const routes=(
             <Route path='/about' component={About}/>
             <Route path='/contact' component={Contact}/>
         </Route>
-    </Router>
 );
 export default routes;

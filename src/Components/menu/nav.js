@@ -9,7 +9,7 @@ class Header extends React.Component{
             <Navbar  fixedTop>
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to='/'><a>Dashboard</a></Link>
+                <Link to='/'>Dashboard</Link>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>

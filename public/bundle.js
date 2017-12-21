@@ -13652,6 +13652,8 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger.createLogger)());
+// Pass initial state from server store
+// const initialState= window.INITIAL_STATE;
 // Create the store
 var store = (0, _redux.createStore)(_reducers2.default, middleware);
 
@@ -13659,7 +13661,11 @@ var store = (0, _redux.createStore)(_reducers2.default, middleware);
 _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
     { store: store },
-    _routes2.default
+    _react2.default.createElement(
+        _reactRouter.Router,
+        { history: _reactRouter.browserHistory },
+        _routes2.default
+    )
 ), document.getElementById("app"));
 
 // We don't need store.subscribe to get store state because we already wrote middleware
@@ -39344,17 +39350,13 @@ var _cart2 = _interopRequireDefault(_cart);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var routes = _react2.default.createElement(
-    _reactRouter.Router,
-    { history: _reactRouter.browserHistory },
-    _react2.default.createElement(
-        _reactRouter.Route,
-        { path: '/', component: _main2.default },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: _bookList2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _bookForm2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _cart2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _about2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _contact2.default })
-    )
+    _reactRouter.Route,
+    { path: '/', component: _main2.default },
+    _react2.default.createElement(_reactRouter.IndexRoute, { component: _bookList2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _bookForm2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _cart2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _about2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _contact2.default })
 );
 exports.default = routes;
 
@@ -39537,11 +39539,7 @@ var Header = function (_React$Component) {
                         _react2.default.createElement(
                             _reactRouter.Link,
                             { to: '/' },
-                            _react2.default.createElement(
-                                'a',
-                                null,
-                                'Dashboard'
-                            )
+                            'Dashboard'
                         )
                     ),
                     _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)

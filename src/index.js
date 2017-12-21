@@ -15,13 +15,17 @@ import {postBooks,deleteBook,updateBook} from './actions/bookActions';
 import routes from "./routes";
 
 const middleware=applyMiddleware(thunk,createLogger());
+// Pass initial state from server store
+// const initialState= window.INITIAL_STATE;
 // Create the store
 const store=createStore(reducers,middleware);
 
 // REACT
 ReactDOM.render(
     <Provider store={store}>
-        {routes}
+        <Router history={browserHistory}>
+            {routes}
+        </Router>
     </Provider>,
     document.getElementById("app")
 );
