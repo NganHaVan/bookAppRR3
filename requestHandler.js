@@ -41,8 +41,7 @@ function handleRender(req,res){
             // res.status(302).alert('Error');
             }
             else if(props){
-            res.render('index',{reactMarkup});
-            res.render('index',{initialState});
+            res.render('index',{reactMarkup,initialState});
             } else{
             res.status(404).send('Not found!');
             }
